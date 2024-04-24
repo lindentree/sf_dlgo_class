@@ -10,11 +10,16 @@ from dlgo import agent
 from dlgo import goboard_fast as goboard
 from dlgo.utils import coords_from_point
 from dlgo.utils import point_from_coords
+from fastapi.middleware.cors import CORSMiddleware
+
+origins = [
+    "http://localhost:5000",
+    "http://localhost",
+    "http://localhost:8080",
+]
 
 
-# @app.get("/")
-# async def root():
-#     return {"message": "Hello World"}
+
 
 
 def web_app(bot_map):
@@ -23,8 +28,19 @@ def web_app(bot_map):
     static_path = os.path.join(here, 'static')
     print(static_path)
 
-    app = FastAPI()
-    app.mount("/static", StaticFiles(directory=static_path, html=True), name="static")
+    app = FastAPI(title="web_app")
+
+    app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+    @app.get("/")
+    async def root():
+        return {"message": "Hello World"}
     
     @app.route('/select-move/<bot_name>', methods=['POST'])
     async def select_move(bot_name):
@@ -52,4 +68,8 @@ def web_app(bot_map):
             'bot_move': bot_move_str,
             'diagnostics': bot_agent.diagnostics()
         })
+    
+
+    app.mount("/static", StaticFiles(directory=static_path, html=True), name="static")
+
     return app
