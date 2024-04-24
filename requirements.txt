@@ -1,0 +1,9 @@
+numpy
+keras 
+flask
+flask-cors
+future
+h5py
+tensorflow
+six
+gomill
