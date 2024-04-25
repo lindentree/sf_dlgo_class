@@ -2,6 +2,8 @@ numpy
 keras 
 flask
 flask-cors
+fastapi
+uvicorn
 future
 h5py
 tensorflow
