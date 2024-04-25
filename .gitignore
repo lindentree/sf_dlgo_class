@@ -16,3 +16,5 @@ build/
 # Poetry
 .poetry/
 .poetry.lock
+
+.DS_Store
