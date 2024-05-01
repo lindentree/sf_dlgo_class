@@ -1,6 +1,6 @@
 # tag::encoding[]
-import six.moves.cPickle as pickle
-import gzip
+#import six.moves.cPickle as pickle
+#import gzip
 import numpy as np
 
 
@@ -28,6 +28,8 @@ def load_data_impl():
     # code based on:
     #   site-packages/keras/datasets/mnist.py
     path = './dlgo/nn/mnist.npz'
+    print("success")
+
     f = np.load(path)
     x_train, y_train = f['x_train'], f['y_train']
     x_test, y_test = f['x_test'], f['y_test']

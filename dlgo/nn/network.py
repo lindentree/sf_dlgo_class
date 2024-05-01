@@ -1,5 +1,5 @@
 from __future__ import print_function
-from six.moves import range
+#from six.moves import range
 # tag::mse[]
 import random
 import numpy as np
@@ -50,6 +50,7 @@ class SequentialNetwork:  # <1>
 # tag::train[]
     def train(self, training_data, epochs, mini_batch_size,
               learning_rate, test_data=None):
+        print("RUNNING")
         n = len(training_data)
         for epoch in range(epochs):  # <1>
             random.shuffle(training_data)
