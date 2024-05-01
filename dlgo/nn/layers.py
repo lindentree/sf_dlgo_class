@@ -79,7 +79,7 @@ class Layer(object):  # <1>
     def describe(self):  # <7>
         raise NotImplementedError
 
-# <1> Each layer implementation has to provid a function to feed input data forward.
+# <1> Each layer implementation has to provide a function to feed input data forward.
 # <2> input_data is reserved for the first layer, all others get their input from the previous output.
 # <3> Layers have to implement backpropagation of error terms, that is a way to feed input errors backward through the network.
 # <4> Input delta is reserved for the last layer, all other layers get their error terms from their successor.

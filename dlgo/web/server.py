@@ -1,8 +1,7 @@
 import os
 from os import path
 
-from fastapi import FastAPI
-from fastapi import Request
+from fastapi import FastAPI, Request
 from fastapi.encoders import jsonable_encoder    # New import
 from fastapi.staticfiles import StaticFiles
 
@@ -19,14 +18,11 @@ origins = [
 ]
 
 
-
-
-
 def web_app(bot_map):
 
     here = os.path.dirname(__file__)
     static_path = os.path.join(here, 'static')
-    print(static_path)
+    #print(static_path)
 
     app = FastAPI(title="web_app")
 
@@ -36,17 +32,20 @@ def web_app(bot_map):
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-)
+    )
 
     @app.get("/")
     async def root():
         return {"message": "Hello World"}
     
-    @app.route('/select-move/<bot_name>', methods=['POST'])
-    async def select_move(bot_name):
-        content = Request.json
+    @app.post("/select-move/{bot_name}")
+    async def select_move(bot_name, request: Request):
+        content = await request.json()
+        print(content)
         board_size = content['board_size']
         game_state = goboard.GameState.new_game(board_size)
+
+        print(content, "TESTING")
         # Replay the game up to this point.
         for move in content['moves']:
             if move == 'pass':

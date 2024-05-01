@@ -21,7 +21,7 @@ net.add(ActivationLayer(10))  # <4>
 # end::test_setup[]
 
 # tag::test_run[]
-net.train(training_data, epochs=10, mini_batch_size=10,
+net.train(training_data, epochs=1, mini_batch_size=10,
           learning_rate=3.0, test_data=test_data)  # <1>
 
 # <1> You can now easily train the model by specifying train and test data, the number of epochs, the mini-batch size and the learning rate.

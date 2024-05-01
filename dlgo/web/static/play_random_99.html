@@ -211,7 +211,7 @@ jsetup.create('board', function(canvas) {
     applyMove(JGO.BLACK, coord);
 
     waitForBot();
-    fetch('/select-move/random', {
+    fetch('/select-move/mcts', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
