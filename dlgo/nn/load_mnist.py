@@ -37,6 +37,7 @@ def load_data_impl():
     return (x_train, y_train), (x_test, y_test)
 
 def load_data():
+    print("LOADING")
     train_data, test_data = load_data_impl()
     return shape_data(train_data), shape_data(test_data)
 
