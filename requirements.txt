@@ -9,3 +9,4 @@ h5py
 tensorflow
 six
 gomill
+scipy
