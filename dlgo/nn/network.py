@@ -3,7 +3,7 @@ from __future__ import print_function
 # tag::mse[]
 import random
 import numpy as np
-
+import time
 
 class MSE:  # <1>
 
@@ -52,7 +52,9 @@ class SequentialNetwork:  # <1>
               learning_rate, test_data=None):
         print("RUNNING")
         n = len(training_data)
+        train_start_time = time.time()
         for epoch in range(epochs):  # <1>
+            epoch_start_time = time.time()
             random.shuffle(training_data)
             mini_batches = [
                 training_data[k:k + mini_batch_size] for
@@ -66,6 +68,10 @@ class SequentialNetwork:  # <1>
                       .format(epoch, self.evaluate(test_data), n_test))  # <4>
             else:
                 print("Epoch {0} complete".format(epoch))
+            epoch_duration = time.time() - epoch_start_time
+            print(f"epoch duration {epoch_duration:.1f} s")
+        train_duration = time.time() - train_start_time
+        print(f"total train time {train_duration:.1f} s")
 
 # <1> To train our network, we pass over data for as many times as there are epochs.
 # <2> We shuffle training data and create mini-batches.
