@@ -23,9 +23,9 @@ def main(epochs):
 	# <4> The final layer has size 10, the number of classes to predict.
 	# end::test_setup[]
 
-	# tag::test_run[]
-	net.train(training_data, epochs=epochs, mini_batch_size=10,
-			  learning_rate=3.0, test_data=test_data)  # <1>
+# tag::test_run[]
+net.train(training_data, epochs=3, mini_batch_size=10,
+          learning_rate=3.0, test_data=test_data)  # <1>
 
 	# <1> You can now easily train the model by specifying train and test data, the number of epochs, the mini-batch size and the learning rate.
 	# end::test_run[]
