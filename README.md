@@ -20,3 +20,5 @@ http://127.0.0.1:5000/static/play_random_99.html
 python3 -m run_network_v2
 
 python3 ./chapter_6_cnn/mcts_go_cnn.py
+
+python3 ./init_ac_agent_V2.py --board-size 9 ac_v1.hdf5
