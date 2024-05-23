@@ -4,19 +4,23 @@ import os
 
 import h5py
 import keras
-from keras.models import load_model, save_model
+from tensorflow.python.keras.models import load_model, save_model
 
 
 def save_model_to_hdf5_group(model, f):
     # Use Keras save_model to save the full model (including optimizer
     # state) to a file.
     # Then we can embed the contents of that HDF5 file inside ours.
-    tempfd, tempfname = tempfile.mkstemp(prefix='tmp-kerasmodel')
+    tempfd, tempfname = tempfile.mkstemp(prefix='tmp-kerasmodel', suffix='.h5')
+    print("TEMP", tempfd, tempfname)
     try:
         os.close(tempfd)
-        save_model(model, tempfname)
+        save_model(model, tempfname, suffix='.h5')
         serialized_model = h5py.File(tempfname, 'r')
         root_item = serialized_model.get('/')
+        print("ROOT", root_item)
+        # for attr_name, attr_value in root_item.attrs.items():
+        #     f.attrs[attr_name] = attr_value
         serialized_model.copy(root_item, f, 'kerasmodel')
         serialized_model.close()
     finally:
@@ -30,12 +34,15 @@ def load_model_from_hdf5_group(f, custom_objects=None):
     try:
         os.close(tempfd)
         serialized_model = h5py.File(tempfname, 'w')
-        root_item = f.get('kerasmodel')
-        for attr_name, attr_value in root_item.attrs.items():
-            serialized_model.attrs[attr_name] = attr_value
-        for k in root_item.keys():
-            f.copy(root_item.get(k), serialized_model, k)
-        serialized_model.close()
+        print("serial", serialized_model)
+        #root_item = f.get('kerasmodel')
+        # root_item = load_model('ac_v1.hdf5')
+        # print('util', root_item)
+        # for attr_name, attr_value in root_item.attrs.items():
+        #     serialized_model.attrs[attr_name] = attr_value
+        # for k in root_item.keys():
+        #     f.copy(root_item.get(k), serialized_model, k)
+        # serialized_model.close()
         return load_model(tempfname, custom_objects=custom_objects)
     finally:
         os.unlink(tempfname)

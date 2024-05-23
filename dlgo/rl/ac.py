@@ -1,6 +1,6 @@
 import numpy as np
 
-from keras.optimizers import SGD
+from tensorflow.python.keras.optimizers import gradient_descent_v2 as SGD
 
 from .. import encoders
 from .. import goboard
@@ -104,7 +104,9 @@ class ACAgent(Agent):
 
 
 def load_ac_agent(h5file):
+    print("FIRING", h5file['model'])
     model = kerasutil.load_model_from_hdf5_group(h5file['model'])
+    print("LOAD", model)
     encoder_name = h5file['encoder'].attrs['name']
     if not isinstance(encoder_name, str):
         encoder_name = encoder_name.decode('ascii')
