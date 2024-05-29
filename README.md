@@ -22,3 +22,9 @@ python3 -m run_network_v2
 python3 ./chapter_6_cnn/mcts_go_cnn.py
 
 python3 ./init_ac_agent_V2.py --board-size 9 ac_v1.hdf5
+
+python3 ./self_play_ac.py \
+--board-size 9 \
+--learning-agent ac_v1.hdf5 \
+--num-games 5000 \
+--experience-out exp_0001.hdf5

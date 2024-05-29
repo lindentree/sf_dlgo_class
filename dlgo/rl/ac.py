@@ -98,6 +98,7 @@ class ACAgent(Agent):
         h5file['encoder'].attrs['board_height'] = self.encoder.board_height
         h5file.create_group('model')
         kerasutil.save_model_to_hdf5_group(self.model, h5file['model'])
+        # kerasutil.save_keras_model(self.model, h5file['model'])
 
     def diagnostics(self):
         return {'value': self.last_state_value}
@@ -106,6 +107,7 @@ class ACAgent(Agent):
 def load_ac_agent(h5file):
     print("FIRING", h5file['model'])
     model = kerasutil.load_model_from_hdf5_group(h5file['model'])
+    #model = kerasutil.load_keras_model(h5file['model'])
     print("LOAD", model)
     encoder_name = h5file['encoder'].attrs['name']
     if not isinstance(encoder_name, str):
