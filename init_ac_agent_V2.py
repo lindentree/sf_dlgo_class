@@ -2,8 +2,12 @@ import argparse
 
 import h5py
 #from keras.layers import Conv2D, Dense, Flatten, Input
-from tensorflow.python.keras.layers import Conv2D, Dense, Flatten, Input, ZeroPadding2D, concatenate
-from tensorflow.python.keras.models import Model
+# from tensorflow.python.keras.layers import Conv2D, Dense, Flatten, Input, ZeroPadding2D, concatenate
+# from tensorflow.python.keras.models import Model
+from tensorflow import keras
+from  keras._tf_keras.keras.layers import Conv2D, Dense, Flatten, Input
+from  keras._tf_keras.keras.models import Model
+from  keras._tf_keras.keras.layers import ZeroPadding2D, concatenate
 #from keras import ZeroPadding2D, concatenate
 #from keras import Model
 

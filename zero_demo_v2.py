@@ -8,11 +8,12 @@
 
 #import h5py
 
-from tensorflow.python.keras.layers import (Activation, Conv2D, Dense, Flatten, Input)
-from tensorflow.python.keras.models import Model
 
-import tensorflow as tf
-#from tensorflow.python.keras.layers.normalization.batch_normalization import BatchNormalization
+
+from tensorflow import keras
+from keras._tf_keras.keras.layers import (Activation, Conv2D, Dense, Flatten, Input, BatchNormalization)
+from keras._tf_keras.keras.models import Model
+
 from dlgo import scoring
 from dlgo import zero
 from dlgo.goboard_fast import GameState, Player, Point
@@ -60,13 +61,12 @@ def main():
         pb = Conv2D(64, (3, 3),
             padding='same',
             data_format='channels_first')(pb)
-        # pb = BatchNormalization(axis=1)(pb)
-        pb = tf.keras.layers.BatchNormalization(axis=1)(pb)
+        pb = BatchNormalization(axis=1)(pb)
         pb = Activation('relu')(pb)
 
     # Policy output
     policy_conv = Conv2D(2, (1, 1), data_format='channels_first')(pb)
-    policy_batch = tf.keras.layers.BatchNormalization(axis=1)(policy_conv)
+    policy_batch = BatchNormalization(axis=1)(policy_conv)
     policy_relu = Activation('relu')(policy_batch)
     policy_flat = Flatten()(policy_relu)
     policy_output = Dense(encoder.num_moves(), activation='softmax')(
@@ -74,7 +74,7 @@ def main():
 
     # Value output
     value_conv = Conv2D(1, (1, 1), data_format='channels_first')(pb)
-    value_batch = tf.keras.layers.BatchNormalization(axis=1)(value_conv)
+    value_batch = BatchNormalization(axis=1)(value_conv)
     value_relu = Activation('relu')(value_batch)
     value_flat = Flatten()(value_relu)
     value_hidden = Dense(256, activation='relu')(value_flat)

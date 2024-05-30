@@ -1,5 +1,9 @@
 import numpy as np
-from keras.optimizers import SGD
+#from keras.optimizers import SGD
+#from tensorflow.keras.optimizers import gradient_descent_v2 as SGD
+from tensorflow import keras
+from keras._tf_keras.keras.optimizers import SGD
+
 
 from ..agent import Agent
 
