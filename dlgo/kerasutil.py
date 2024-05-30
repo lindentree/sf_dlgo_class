@@ -6,10 +6,13 @@ import h5py
 # import keras
 # from tensorflow.python.keras.models import load_model, save_model
 
-import tensorflow.python.keras as tf_keras
-from keras import __version__
-tf_keras.__version__ = __version__
-from tensorflow.python.keras.models import load_model, save_model
+# import tensorflow.python.keras as tf_keras
+# from keras import __version__
+# tf_keras.__version__ = __version__
+# from tensorflow.python.keras.models import load_model, save_model
+
+from tensorflow import keras
+from keras._tf_keras.keras.models import load_model, save_model
 
 
 def save_model_to_hdf5_group(model, f):
